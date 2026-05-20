@@ -1,0 +1,77 @@
+Metadata-Version: 2.4
+Name: ics-thermal-solver
+Version: 1.0.0
+Summary: Implicit Constraint Solver (ICS) and Projected Constraint Solver (PCS) for nonlinear thermal models
+Author: Andrew Parry
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: numpy
+Requires-Dist: scipy
+Requires-Dist: matplotlib
+
+# ICS / PCS Thermal Constraint Solver
+
+This repository contains the reference implementation of the **Implicit Constraint Solver (ICS)** and the **Projected Constraint Solver (PCS)** used in:
+
+> A. Parry, *Constraint‑Aware Execution Semantics for Nonlinear Thermal Models with Temperature‑Dependent Capacities*, 2026.
+
+---
+
+## Installation
+
+Install the package in editable mode:
+
+```bash
+pip install -e .
+This makes the ics_thermal package importable and allows you to modify the source code under src/ics_thermal/ without reinstalling.
+
+Running the Examples
+The examples/ directory contains scripts that reproduce the numerical experiments from the paper.
+
+To run all example tests (Test A, B, C):
+
+bash
+python examples/run_tests.py
+This will:
+
+run ICS and PCS on benchmark configurations
+
+print CPU time and iteration counts
+
+generate plots (temperature trajectories, ICS vs PCS comparisons, phase planes, Newton iterations)
+
+If you prefer saving figures instead of displaying them, replace plt.show() with plt.savefig(...) inside examples/run_tests.py.
+
+Running the Unit Tests
+The tests/ directory contains a small test suite covering:
+
+active‑set hysteresis logic
+
+configuration of test cases
+
+consistency between ICS and PCS trajectories
+
+The tests use pytest. To run them:
+
+bash
+pip install pytest
+pytest -v
+Pytest will automatically discover and run all tests in the tests/ directory.
+
+
+---
+
+## Reproducibility
+
+All figures and numerical results in the paper can be reproduced directly from this repository.
+
+To regenerate every figure:
+
+```bash
+python examples/run_tests.py
+To verify solver correctness and consistency:
+
+bash
+pytest -v
+The example scripts and test suite use fixed parameters and deterministic solvers, ensuring identical results across runs and platforms.
+A frozen release corresponding to the manuscript version is archived under the tag v1.0.

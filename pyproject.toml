@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ics-thermal-solver"
+version = "1.0.0"
+description = "Implicit Constraint Solver (ICS) and Projected Constraint Solver (PCS) for nonlinear thermal models"
+authors = [
+  { name = "Andrew Parry" }
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy",
+  "scipy",
+  "matplotlib",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
