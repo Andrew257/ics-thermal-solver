@@ -1,66 +1,74 @@
-# ICS / PCS Thermal Constraint Solver
+ICS Thermal Solver
+Constraint‑Aware Execution Semantics for Nonlinear Thermal Models with Temperature‑Dependent Capacities  
+Frozen version: v1.0
 
-This repository contains the reference implementation of the **Implicit Constraint Solver (ICS)** and the **Projected Constraint Solver (PCS)** used in:
+This repository contains the reference implementation of the implicit constraint solver (ICS) used in the SMPT manuscript “Constraint‑Aware Execution Semantics for Nonlinear Thermal Models with Temperature‑Dependent Capacities”.
+The version tagged v1.0 corresponds exactly to the solver used to generate all results in the paper.
 
-> A. Parry, *Constraint‑Aware Execution Semantics for Nonlinear Thermal Models with Temperature‑Dependent Capacities*, 2026.
+1. Overview
+The solver implements:
 
----
+nonlinear thermal dynamics
 
-## Installation
+temperature‑dependent heat capacities
 
-Install the package in editable mode:
+implicit constraint‑aware execution semantics
 
-```bash
-pip install -e .
-This makes the ics_thermal package importable and allows you to modify the source code under src/ics_thermal/ without reinstalling.
+stable integration under stiff regimes
 
-Running the Examples
-The examples/ directory contains scripts that reproduce the numerical experiments from the paper.
+energy‑consistent updates
 
-To run all example tests (Test A, B, C):
+The implementation is lightweight, dependency‑minimal, and designed for reproducibility.
+
+2. Repository Structure
+Code
+ics-thermal-solver/
+│
+├── src/                 # Core solver implementation
+├── tests/               # Test A/B/C scripts
+├── examples/            # Example models and reproduction scripts
+├── README.md            # This file
+├── requirements.txt     # Minimal dependencies
+└── LICENSE              # MIT license
+3. Installation
+bash
+pip install -r requirements.txt
+Python ≥ 3.9 recommended.
+
+4. Running the Solver
+Test A — Basic nonlinear capacity model
+bash
+python tests/test_A.py
+Test B — Constrained update with stiff dynamics
+bash
+python tests/test_B.py
+Test C — Full temperature‑dependent capacity model
+bash
+python tests/test_C.py
+5. Reproducing Figures from the Paper
+Each figure has a corresponding script in:
+
+Code
+examples/reproduce_figure_X.py
+Run:
 
 bash
-python examples/run_tests.py
-This will:
+python examples/reproduce_figure_3.py
+All figures in the paper can be regenerated using these scripts.
 
-run ICS and PCS on benchmark configurations
+6. Versioning
+The solver version used in the manuscript is archived under:
 
-print CPU time and iteration counts
-
-generate plots (temperature trajectories, ICS vs PCS comparisons, phase planes, Newton iterations)
-
-If you prefer saving figures instead of displaying them, replace plt.show() with plt.savefig(...) inside examples/run_tests.py.
-
-Running the Unit Tests
-The tests/ directory contains a small test suite covering:
-
-active‑set hysteresis logic
-
-configuration of test cases
-
-consistency between ICS and PCS trajectories
-
-The tests use pytest. To run them:
+Code
+git tag v1.0
+To check out the frozen version:
 
 bash
-pip install pytest
-pytest -v
-Pytest will automatically discover and run all tests in the tests/ directory.
+git checkout v1.0
+7. Citation
+If you use this solver, please cite:
 
-
----
-
-## Reproducibility
-
-All figures and numerical results in the paper can be reproduced directly from this repository.
-
-To regenerate every figure:
-
-```bash
-python examples/run_tests.py
-To verify solver correctness and consistency:
-
-bash
-pytest -v
-The example scripts and test suite use fixed parameters and deterministic solvers, ensuring identical results across runs and platforms.
-A frozen release corresponding to the manuscript version is archived under the tag v1.0.
+Code
+Parry, A. (2026). Constraint‑Aware Execution Semantics for Nonlinear Thermal Models with Temperature‑Dependent Capacities. SMPT.
+8. License
+This project is released under the MIT License (see LICENSE file).
