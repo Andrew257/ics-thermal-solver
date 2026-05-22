@@ -107,8 +107,8 @@ def plot_compare_ics_pcs(ics, pcs, nodes=None):
     # ============================================================
     plt.figure(figsize=(10, 4))
     for i in nodes:
-        plt.plot(tI, TI[:, i], label=f"ICS T{i}")
-        plt.plot(tP, TP[:, i], "--", label=f"PCS T{i}")
+        plt.plot(tI, TI[:, i], label=f"ICS T{i}", linewidth = 2.5)
+        plt.plot(tP, TP[:, i], "--", label=f"PCS T{i}", linewidth = 2.5)
     plt.xlabel("Time t [s]")
     plt.ylabel("Temperature T [°C]")
     plt.grid(True)
@@ -125,8 +125,8 @@ def plot_compare_ics_pcs(ics, pcs, nodes=None):
 
     plt.figure(figsize=(10, 4))
     for e in edges_to_plot:
-        plt.plot(tI, QI[:, e], label=f"ICS Q{e}")
-        plt.plot(tP, QP[:, e], "--", label=f"PCS Q{e}")
+        plt.plot(tI, QI[:, e], label=f"ICS Q{e}", linewidth = 2.5)
+        plt.plot(tP, QP[:, e], "--", label=f"PCS Q{e}", linewidth = 2.5)
     plt.xlabel("Time t [s]")
     plt.ylabel("Heat flow Q [W]")
     plt.grid(True)
@@ -138,8 +138,8 @@ def plot_compare_ics_pcs(ics, pcs, nodes=None):
     # ============================================================
     plt.figure(figsize=(10, 4))
     for i in nodes:
-        plt.plot(tI, QcI[:, i], label=f"ICS Qc{i}")
-        plt.plot(tP, QcP[:, i], "--", label=f"PCS Qc{i}")
+        plt.plot(tI, QcI[:, i], label=f"ICS Qc{i}", linewidth = 2.5)
+        plt.plot(tP, QcP[:, i], "--", label=f"PCS Qc{i}", linewidth = 2.5)
     plt.xlabel("Time t [s]")
     plt.ylabel("Constraint flow Qc [W]")
     plt.grid(True)
@@ -208,7 +208,7 @@ def plot_phase_planes_ics_pcs(ics, pcs):
                    facecolors='none', edgecolors='blue', s=40,
                    label=f"ICS node {i}")
         ax.scatter(TP[:, i], QcP[:, i],
-                   marker="x", s=15, color="orange",
+                   marker=".", s=15, color="orange",
                    label=f"PCS node {i}")
 
         ax.set_xlabel(f"T{i} [°C]")

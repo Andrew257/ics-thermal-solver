@@ -42,8 +42,11 @@ def run_test_B():
     print(f"ICS CPU = {t1 - t0:.3f}s, Newton iters = {sum(ics['n_iter'])}")
 
     # PCS with coarse step for quick comparison
+    t0 = time.perf_counter()
     pcs = run_test_case("B", N=10, solver="PCS",
                         t_final=13.0, h_pcs=0.0002)
+    t1 = time.perf_counter()
+    print(f"PCS CPU = {t1 - t0:.3f}s, steps = {pcs['icount']}")
 
     plot_compare_ics_pcs(ics, pcs, nodes=[0, 3, 6, 9])
     plt.show()
@@ -61,9 +64,11 @@ def run_test_C():
                         t_final=13.0, dt_ics=0.05)
     t1 = time.perf_counter()
     print(f"ICS CPU = {t1 - t0:.3f}s, Newton iters = {sum(ics['n_iter'])}")
-
+    t0 = time.perf_counter()
     pcs = run_test_case("C", N=10, solver="PCS",
-                        t_final=13.0, h_pcs=5e-6)
+                        t_final=13.0, h_pcs=2.5e-6)
+    t1 = time.perf_counter()
+    print(f"PCS CPU = {t1 - t0:.3f}s, steps = {pcs['icount']}")
 
     plot_compare_ics_pcs(ics, pcs, nodes=[0, 3, 6, 9])
     plt.show()

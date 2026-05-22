@@ -1,8 +1,8 @@
 ICS Thermal Solver
-Constraint‑Aware Execution Semantics for Nonlinear Thermal Models with Temperature‑Dependent Capacities  
+Constraint‑Aware Execution Semantics for Nonlinear Thermal Models  
 Frozen version: v1.0
 
-This repository contains the reference implementation of the implicit constraint solver (ICS) used in the SMPT manuscript “Constraint‑Aware Execution Semantics for Nonlinear Thermal Models with Temperature‑Dependent Capacities”.
+This repository contains the reference implementation of the implicit constraint solver (ICS) used in the JMSIC manuscript “Constraint‑Aware Execution Semantics for Nonlinear Thermal Models”.
 The version tagged v1.0 corresponds exactly to the solver used to generate all results in the paper.
 
 1. Overview
@@ -34,27 +34,24 @@ ics-thermal-solver/
 bash
 pip install -r requirements.txt
 Python ≥ 3.9 recommended.
-
 4. Running the Solver
-Test A — Basic nonlinear capacity model
+Test A — Active set
 bash
-python tests/test_A.py
-Test B — Constrained update with stiff dynamics
+python tests/test\_active\_set.py
+Test B — Configuration
 bash
-python tests/test_B.py
-Test C — Full temperature‑dependent capacity model
+python tests/test\_config.py
+Test C — ICS and PCS consistency
 bash
-python tests/test_C.py
+python tests/test\_ics\_pcs\_consistency.py
 5. Reproducing Figures from the Paper
-Each figure has a corresponding script in:
+The figures are created using the script:
 
-Code
-examples/reproduce_figure_X.py
-Run:
+&#x20;   Run:
 
-bash
-python examples/reproduce_figure_3.py
-All figures in the paper can be regenerated using these scripts.
+&#x20;   bash
+python examples/run\_tests.py
+All figures in the paper can be regenerated using this script.
 
 6. Versioning
 The solver version used in the manuscript is archived under:
@@ -69,6 +66,7 @@ git checkout v1.0
 If you use this solver, please cite:
 
 Code
-Parry, A. (2026). Constraint‑Aware Execution Semantics for Nonlinear Thermal Models with Temperature‑Dependent Capacities. SMPT.
+Parry, A. (2026). Constraint‑Aware Execution Semantics for Nonlinear Thermal Models. JMSIC.
 8. License
 This project is released under the MIT License (see LICENSE file).
+
