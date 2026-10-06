@@ -1,9 +1,14 @@
 # examples/run_benchmark_tables.py
 """
-Benchmark runner to dynamically produce Table 2 (Test B) and Table 3 (Test C).
-Saves CSV files directly to the project root:
-  - table_2_test_b.csv
-  - table_3_test_c.csv
+Benchmark runner producing the performance tables of Section 7.
+
+Saves CSV files directly to the project root, named to match the
+table numbers in the manuscript:
+  - table_02_testB_performance.csv   (Table 2, Section 7.2)
+  - table_03_testC_performance.csv   (Table 3, Section 7.3)
+
+Usage:
+  python examples/run_benchmark_tables.py
 """
 
 import sys
@@ -66,7 +71,8 @@ def print_table(title, headers, rows):
 
 def run_benchmark_series(test_name, N_list, t_final, dt_ics, h_pcs):
     rows = []
-    print(f"\n>>> Running Benchmark Sweep: Test {test_name} (t_final={t_final}s, dt_ics={dt_ics}s, h_pcs={h_pcs}s)")
+    print(f"\n>>> Running Benchmark Sweep: Test {test_name} "
+          f"(t_final={t_final}s, dt_ics={dt_ics}s, h_pcs={h_pcs}s)")
     print("-" * 75)
 
     for N in N_list:
@@ -91,7 +97,9 @@ def run_benchmark_series(test_name, N_list, t_final, dt_ics, h_pcs):
 
         # Format steps string (e.g. 5x10^6 if huge)
         if pcs_steps >= 1_000_000:
-            steps_str = r"$5 \times 10^6$" if abs(pcs_steps - 5_000_000) < 500_000 else format_int(pcs_steps)
+            steps_str = (r"$5 \times 10^6$"
+                         if abs(pcs_steps - 5_000_000) < 500_000
+                         else format_int(pcs_steps))
         else:
             steps_str = format_int(pcs_steps)
 
@@ -104,7 +112,8 @@ def run_benchmark_series(test_name, N_list, t_final, dt_ics, h_pcs):
             f"{speedup:.2f}" if speedup < 10.0 else f"{speedup:.1f}"
         ]
         rows.append(row)
-        print(f"    -> N={N:3d} | ICS: {row[1]}s ({row[2]} iters) | PCS: {row[3]}s ({row[4]} steps) | Speedup: {row[5]}x")
+        print(f"    -> N={N:3d} | ICS: {row[1]}s ({row[2]} iters) | "
+              f"PCS: {row[3]}s ({row[4]} steps) | Speedup: {row[5]}x")
 
     return rows
 
@@ -113,7 +122,7 @@ def main():
     # Chain lengths tested in the manuscript
     N_SWEEP = [10, 20, 50, 100, 200]
 
-    # --- 1. Table 2: Test B ---
+    # --- 1. Table 2: Test B ------------------------------------------
     rows_t2 = run_benchmark_series(
         test_name="B",
         N_list=N_SWEEP,
@@ -122,11 +131,11 @@ def main():
         h_pcs=0.0002
     )
     print_table("Table 2: Test B Performance", HEADERS, rows_t2)
-    save_csv("table_2_test_b.csv", HEADERS, rows_t2)
+    save_csv("table_02_testB_performance.csv", HEADERS, rows_t2)
 
-    # --- 2. Table 3: Test C ---
-    # Note: For N=100 and N=200, PCS with h_pcs=2.5e-6 executes ~5 million steps
-    # and takes several minutes per run.
+    # --- 2. Table 3: Test C ------------------------------------------
+    # Note: for N = 100 and N = 200, PCS with h_pcs = 2.5e-6 executes
+    # ~5 million steps and takes several minutes per run.
     rows_t3 = run_benchmark_series(
         test_name="C",
         N_list=N_SWEEP,
@@ -135,7 +144,7 @@ def main():
         h_pcs=2.5e-6
     )
     print_table("Table 3: Test C Performance", HEADERS, rows_t3)
-    save_csv("table_3_test_c.csv", HEADERS, rows_t3)
+    save_csv("table_03_testC_performance.csv", HEADERS, rows_t3)
 
 
 if __name__ == "__main__":

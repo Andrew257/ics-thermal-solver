@@ -1,6 +1,6 @@
 # ICS Thermal Solver
 
-**Constraint-Aware Execution Semantics for Nonlinear Thermal Models**  
+**An Implicit Active Set Solver for Constrained Thermal Dynamics**  
 *Frozen release: v1.0*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -8,7 +8,7 @@
 
 This repository contains the reference implementation of the **Implicit Constraint Solver (ICS)** and the reference **Projected Constraint Solver (PCS)** described in the manuscript:
 
-> **"Constraint-Aware Execution Semantics for Nonlinear Thermal Models"**  
+> **"An Implicit Active Set Solver for Constrained Thermal Dynamics"**  
 > Andrew Parry, Matthieu Simon, Nicolas Maquignon, Giovanni Sosio (*International Journal of Modelling and Simulation*, 2026).
 
 The tag `v1.0` archives the exact codebase used to generate all figures, benchmarks, and comparative performance data reported in the paper.
@@ -51,8 +51,9 @@ ics-thermal-solver/
 │
 ├── examples/                      # Reproduction and benchmark scripts
 │   ├── plot_results.py            # Plotting routines (B&W/color publication-safe)
-│   ├── run_tests.py               # Generates paper figures for Tests A, B, and C
-│   └── run_benchmark_tables.py    # Generates Table 2 and Table 3 performance sweeps
+│   ├── run_benchmark_tables.py    # Generates Table 2 and Table 3 performance sweeps
+│   ├── run_figures.py             # Generates paper figures for Tests A, B, and C
+│   └── run_projection_study.py    # Generates data on energy conservation
 │
 ├── table_2_test_b.csv             # Output benchmark data for Test B
 ├── table_3_test_c.csv             # Output benchmark data for Test C
@@ -113,16 +114,16 @@ python tests/test_ics_pcs_consistency.py
 
 All figures and performance tables from the paper can be reproduced using the scripts located in `examples/`.
 
-### 1. Reproducing Figures (`examples/run_tests.py`)
+### 1. Reproducing Figures (`examples/run_figures.py`)
 
-The script `run_tests.py` runs the three canonical benchmark cases and renders all corresponding figures:
+The script `run_figures.py` runs the three canonical benchmark cases and renders all corresponding figures:
 - **Test A ($N = 2$):** Baseline verification against continuous reference (Figures 2–7: temperatures, heat flows, constraint flows, phase-plane orbits, mode timelines, and Newton iterations).
 - **Test B ($N = 10$):** Uniform chain with distributed, phase-shifted heating cycles (Figures 8–10: temperature propagation, activation raster, iteration profile).
 - **Test C ($N = 10$):** Stiff network with quartic radiation and tight temperature bounds (Figures 11–14).
 
 Run:
 ```bash
-python examples/run_tests.py
+python examples/run_figures.py
 ```
 
 *Note: Visualizations are generated using `examples/plot_results.py`, which utilizes high-contrast line styles and grayscale-safe patterns suitable for both online display and monochrome print.*
@@ -146,6 +147,22 @@ This will print the formatted ASCII tables in your console and export the result
 
 ---
 
+### 3. Reproducing Energy Conservation Data (`examples/run_projection_study.py`)
+
+The script `run_projection_study.py` measures the discrete energy-balance residual of both solvers and the step-size convergence of the projected solution:
+
+Run:
+```bash
+python examples/run_projection_study.py
+```
+
+This will print the formatted ASCII tables in your console and export the results to:
+- `table_04_newton_stats.csv`
+- `table_05_energy_residual.csv`
+- `fig15_energy_residual_testC.png`
+
+---
+
 ## Versioning & Archival
 
 The frozen version corresponding to the published paper is tagged as `v1.0`. To inspect or check out this exact release:
@@ -163,7 +180,7 @@ If you use this code or solver methodology in your research, please cite:
 
 ```bibtex
 @article{parry2026constraint,
-  title     = {Constraint-Aware Execution Semantics for Nonlinear Thermal Models},
+  title     = {An Implicit Active Set Solver for Constrained Thermal Dynamics},
   author    = {Parry, Andrew and Simon, Matthieu and Maquignon, Nicolas and Sosio, Giovanni},
   journal   = {International Journal of Modelling and Simulation},
   year      = {2026},

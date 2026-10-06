@@ -34,3 +34,8 @@ key.txt.pub
 # Operating System files
 .DS_Store
 Thumbs.db
+
+# general
+*.png
+*.csv
+*.txt
