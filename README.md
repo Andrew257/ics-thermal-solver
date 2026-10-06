@@ -55,6 +55,7 @@ ics-thermal-solver/
 │   ├── run_figures.py             # Generates paper figures for Tests A, B, and C
 │   └── run_projection_study.py    # Generates data on energy conservation
 │
+├── .gitignore                     # File listing patterns Git should ignore and never track
 ├── requirements.txt               # Minimal Python dependencies
 ├── pyproject.toml                 # Package configuration
 ├── LICENSE                        # MIT License
